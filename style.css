@@ -1,0 +1,1099 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap");
+
+/* =====================================
+   RESET
+===================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+
+  font-family: "DM Sans", sans-serif;
+
+  color: #f5efff;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(126, 70, 190, 0.28),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(185, 63, 150, 0.2),
+      transparent 30%
+    ),
+    radial-gradient(circle at 70% 90%, rgba(74, 65, 170, 0.2), transparent 35%),
+    linear-gradient(135deg, #09070f, #110b1c, #0c0915);
+
+  overflow-x: hidden;
+}
+
+/* =====================================
+   BACKGROUND GLOW
+===================================== */
+
+.background-shape {
+  position: fixed;
+
+  border-radius: 50%;
+
+  filter: blur(70px);
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+.shape-one {
+  width: 300px;
+  height: 300px;
+
+  background: rgba(145, 76, 225, 0.2);
+
+  top: -100px;
+  left: -80px;
+}
+
+.shape-two {
+  width: 350px;
+  height: 350px;
+
+  background: rgba(214, 70, 165, 0.14);
+
+  right: -120px;
+  top: 30%;
+}
+
+.shape-three {
+  width: 250px;
+  height: 250px;
+
+  background: rgba(77, 96, 220, 0.12);
+
+  bottom: -80px;
+  left: 35%;
+}
+
+/* =====================================
+   MAIN
+===================================== */
+
+.container {
+  width: min(1200px, 94%);
+
+  margin: 40px auto;
+
+  display: grid;
+
+  grid-template-columns: 1.15fr 0.85fr;
+
+  gap: 25px;
+
+  align-items: stretch;
+}
+
+/* =====================================
+   FORM CARD
+===================================== */
+
+.form-card {
+  background: linear-gradient(
+    145deg,
+    rgba(29, 20, 40, 0.96),
+    rgba(17, 13, 25, 0.96)
+  );
+
+  border: 1px solid rgba(190, 145, 240, 0.15);
+
+  border-radius: 28px;
+
+  padding: 42px;
+
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+
+  backdrop-filter: blur(20px);
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+.eyebrow {
+  color: #b98aff;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 2.5px;
+
+  margin-bottom: 14px;
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(38px, 4vw, 58px);
+
+  line-height: 1.1;
+
+  white-space: nowrap;
+
+  color: #ffffff;
+}
+
+h1 span {
+  color: #bd7cff;
+}
+
+.subtitle {
+  max-width: 570px;
+
+  margin-top: 18px;
+
+  color: #9f94aa;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+/* =====================================
+   SECTION
+===================================== */
+
+.section {
+  margin-top: 35px;
+}
+
+.section-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 20px;
+}
+
+.number {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: rgba(168, 105, 235, 0.13);
+
+  border: 1px solid rgba(190, 130, 250, 0.15);
+
+  color: #c18aff;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.section-title h2 {
+  color: #eee5f7;
+
+  font-size: 16px;
+}
+
+.section-title p {
+  color: #817587;
+
+  font-size: 11px;
+
+  margin-top: 3px;
+}
+
+/* =====================================
+   FORM GRID
+===================================== */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  color: #a99bb4;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+/* =====================================
+   INPUTS
+===================================== */
+
+input,
+select {
+  width: 100%;
+
+  height: 48px;
+
+  padding: 0 14px;
+
+  border-radius: 12px;
+
+  border: 1px solid #33283d;
+
+  outline: none;
+
+  background: #17111f;
+
+  color: #eee7f4;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  transition: 0.25s;
+}
+
+input::placeholder {
+  color: #655b6d;
+}
+
+input:focus,
+select:focus {
+  border-color: #a66ce0;
+
+  background: #1b1425;
+
+  box-shadow: 0 0 0 4px rgba(166, 108, 224, 0.1);
+}
+
+select option {
+  background: #17111f;
+
+  color: white;
+}
+
+/* =====================================
+   STRESS BUTTONS
+===================================== */
+
+.stress-buttons {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 8px;
+}
+
+.stress-buttons button {
+  height: 44px;
+
+  border-radius: 11px;
+
+  border: 1px solid #34293d;
+
+  background: #17111f;
+
+  color: #817588;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  transition: 0.25s;
+}
+
+.stress-buttons button:hover {
+  border-color: #a56bd9;
+
+  color: #c28aff;
+
+  transform: translateY(-2px);
+}
+
+.stress-buttons button.active {
+  background: linear-gradient(135deg, #854bc2, #ad5ed6);
+
+  border-color: transparent;
+
+  color: white;
+
+  box-shadow: 0 8px 25px rgba(143, 75, 198, 0.25);
+}
+
+/* =====================================
+   BUTTON ROW
+===================================== */
+
+.button-row {
+  display: grid;
+
+  grid-template-columns: 1fr 120px;
+
+  gap: 10px;
+
+  margin-top: 32px;
+}
+
+/* =====================================
+   PREDICT BUTTON
+===================================== */
+
+.predict-btn {
+  height: 54px;
+
+  border: none;
+
+  border-radius: 13px;
+
+  background: linear-gradient(135deg, #884cc5, #b25edb);
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 15px 30px rgba(121, 60, 175, 0.25);
+
+  transition: 0.25s;
+}
+
+.predict-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 18px 35px rgba(121, 60, 175, 0.35);
+}
+
+.predict-btn:disabled {
+  opacity: 0.6;
+
+  cursor: wait;
+}
+
+/* =====================================
+   RELOAD BUTTON
+===================================== */
+
+.reload-btn {
+  height: 54px;
+
+  border-radius: 13px;
+
+  border: 1px solid #3c2e48;
+
+  background: #17111f;
+
+  color: #c6b6d0;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.reload-btn:hover {
+  background: #21172c;
+
+  border-color: #9c62cc;
+
+  color: #d49aff;
+
+  transform: translateY(-2px);
+}
+
+/* =====================================
+   LOADER
+===================================== */
+
+.loader {
+  display: none;
+
+  width: 17px;
+  height: 17px;
+
+  margin-left: 8px;
+
+  vertical-align: middle;
+
+  border: 2px solid rgba(255, 255, 255, 0.35);
+
+  border-top-color: white;
+
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+.loading .loader {
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =====================================
+   RESULT CARD
+===================================== */
+
+.result-card {
+  min-height: 650px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 38px;
+
+  border-radius: 28px;
+
+  background:
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(194, 111, 255, 0.25),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 20% 90%,
+      rgba(220, 76, 176, 0.15),
+      transparent 30%
+    ),
+    linear-gradient(145deg, #21132f, #30194a, #3d2058);
+
+  border: 1px solid rgba(205, 157, 255, 0.15);
+
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+/* =====================================
+   DECORATION
+===================================== */
+
+.result-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  right: -130px;
+  top: -120px;
+}
+
+.result-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 190px;
+  height: 190px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  left: -110px;
+  bottom: 70px;
+}
+
+/* =====================================
+   RESULT HEADER
+===================================== */
+
+.result-top {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+.result-label {
+  color: #c9a8df;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 8px;
+}
+
+.result-top h2 {
+  font-family: "Playfair Display", serif;
+
+  font-size: 27px;
+
+  color: white;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #d49aff;
+
+  box-shadow: 0 0 18px rgba(212, 154, 255, 0.8);
+}
+
+/* =====================================
+   RESULT STATE
+===================================== */
+
+.result-state {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.result-state h3 {
+  margin-top: 20px;
+
+  color: #ffffff;
+
+  font-size: 21px;
+}
+
+.result-state p {
+  max-width: 300px;
+
+  margin-top: 10px;
+
+  color: #c6b7cf;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+}
+
+/* =====================================
+   IDLE ICON
+===================================== */
+
+.big-icon {
+  width: 105px;
+  height: 105px;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  color: #d09aff;
+
+  font-size: 45px;
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+}
+
+/* =====================================
+   LOADING
+===================================== */
+
+.loading-circle {
+  width: 85px;
+  height: 85px;
+
+  border-radius: 50%;
+
+  border: 5px solid rgba(255, 255, 255, 0.12);
+
+  border-top-color: #d69bff;
+
+  animation: spin 1s linear infinite;
+}
+
+/* =====================================
+   SCORE
+===================================== */
+
+.score-circle {
+  width: 220px;
+  height: 220px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.025)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.22),
+    inset 0 0 45px rgba(255, 255, 255, 0.03);
+}
+
+.score-circle::before {
+  content: "";
+
+  position: absolute;
+
+  width: 195px;
+  height: 195px;
+
+  border-radius: 50%;
+
+  border: 2px solid rgba(213, 160, 255, 0.18);
+}
+
+.score-number {
+  position: relative;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: 58px;
+
+  font-weight: 700;
+
+  color: #ffffff;
+
+  z-index: 2;
+}
+
+.score-text {
+  position: relative;
+
+  font-size: 9px;
+
+  letter-spacing: 3px;
+
+  color: #c7b5d4;
+
+  z-index: 2;
+}
+
+/* =====================================
+   MODEL NOTE
+===================================== */
+
+.model-note {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 25px;
+
+  padding: 10px 15px;
+
+  border-radius: 11px;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.model-note span {
+  color: #a995b5;
+
+  font-size: 8px;
+
+  letter-spacing: 1px;
+}
+
+.model-note strong {
+  color: #e4caff;
+
+  font-size: 10px;
+}
+
+/* =====================================
+   ERROR
+===================================== */
+
+.error-icon {
+  width: 80px;
+  height: 80px;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  color: #ff9fd4;
+
+  font-size: 32px;
+}
+
+.retry-btn {
+  margin-top: 20px;
+
+  padding: 11px 24px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: white;
+
+  color: #3b2052;
+
+  font-family: inherit;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+/* =====================================
+   RESULT FOOTER
+===================================== */
+
+.result-footer {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  position: relative;
+
+  z-index: 2;
+
+  color: #a994b4;
+
+  font-size: 7px;
+
+  letter-spacing: 1.5px;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer {
+  padding: 0 20px 30px;
+
+  text-align: center;
+
+  color: #665b6e;
+
+  font-size: 10px;
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .result-card {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 650px) {
+  .container {
+    width: 94%;
+
+    margin: 20px auto;
+  }
+
+  .form-card,
+  .result-card {
+    padding: 25px;
+
+    border-radius: 22px;
+  }
+
+  h1 {
+    font-size: 38px;
+
+    white-space: normal;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field.full {
+    grid-column: auto;
+  }
+
+  .stress-buttons {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .button-row {
+    grid-template-columns: 1fr;
+  }
+
+  .result-card {
+    min-height: 470px;
+  }
+
+  .score-circle {
+    width: 190px;
+    height: 190px;
+  }
+
+  .score-number {
+    font-size: 50px;
+  }
+}
+
+/* =====================================
+   SIGNAL BADGE
+===================================== */
+
+.signal-badge {
+  margin-top: 22px;
+
+  padding: 8px 18px;
+
+  border-radius: 30px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  transition: 0.3s ease;
+}
+
+/* =====================================
+   STRONG SIGNAL
+===================================== */
+
+.signal-badge.strong {
+  color: #8ff0c2;
+
+  background: rgba(74, 222, 128, 0.1);
+
+  border: 1px solid rgba(74, 222, 128, 0.25);
+
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.08);
+}
+
+/* =====================================
+   MEDIUM SIGNAL
+===================================== */
+
+.signal-badge.medium {
+  color: #ffd27d;
+
+  background: rgba(251, 191, 36, 0.1);
+
+  border: 1px solid rgba(251, 191, 36, 0.25);
+
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.08);
+}
+
+/* =====================================
+   LOW SIGNAL
+===================================== */
+
+.signal-badge.low {
+  color: #ff9da8;
+
+  background: rgba(248, 113, 113, 0.1);
+
+  border: 1px solid rgba(248, 113, 113, 0.25);
+
+  box-shadow: 0 0 20px rgba(248, 113, 113, 0.08);
+}
+
+/* =====================================
+   SHORT THOUGHT BOX
+===================================== */
+
+.signal-thought {
+  width: 100%;
+
+  max-width: 360px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  margin-top: 20px;
+
+  padding: 13px 15px;
+
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.045);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  text-align: left;
+
+  transition: 0.3s ease;
+}
+
+.thought-icon {
+  color: #d49aff;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+.signal-thought p {
+  margin: 0 !important;
+
+  max-width: none !important;
+
+  font-size: 11px !important;
+
+  line-height: 1.6 !important;
+
+  color: #c9bdcf !important;
+}
+
+/* =====================================
+   STRONG THOUGHT
+===================================== */
+
+.signal-thought.strong {
+  border-color: rgba(74, 222, 128, 0.15);
+
+  background: rgba(74, 222, 128, 0.045);
+}
+
+/* =====================================
+   MEDIUM THOUGHT
+===================================== */
+
+.signal-thought.medium {
+  border-color: rgba(251, 191, 36, 0.15);
+
+  background: rgba(251, 191, 36, 0.045);
+}
+
+/* =====================================
+   LOW THOUGHT
+===================================== */
+
+.signal-thought.low {
+  border-color: rgba(248, 113, 113, 0.15);
+
+  background: rgba(248, 113, 113, 0.045);
+}
+
+/* =====================================
+   SCORE COLORS
+===================================== */
+
+.score-circle.strong {
+  border-color: rgba(74, 222, 128, 0.35);
+
+  box-shadow: 0 0 45px rgba(74, 222, 128, 0.12);
+}
+
+.score-circle.medium {
+  border-color: rgba(251, 191, 36, 0.35);
+
+  box-shadow: 0 0 45px rgba(251, 191, 36, 0.1);
+}
+
+.score-circle.low {
+  border-color: rgba(248, 113, 113, 0.35);
+
+  box-shadow: 0 0 45px rgba(248, 113, 113, 0.1);
+}
