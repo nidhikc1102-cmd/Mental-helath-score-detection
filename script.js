@@ -2,7 +2,10 @@
 // FASTAPI URL
 // ==========================================
 
-const API_BASE = "http://127.0.0.1:8000";
+// Use the same origin when deployed on Render, fallback to localhost for dev
+const API_BASE = (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost")
+    ? "http://127.0.0.1:8000"
+    : window.location.origin;
 
 
 // ==========================================

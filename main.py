@@ -1,9 +1,12 @@
 import joblib
 import pandas as pd
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 from typing import Literal
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 model = joblib.load('Mental_Health_Model.pkl')
 top_countries = ['Other','India','USA','Canada','Australia','UK','Germany','Mexico','Turkey','France']
@@ -31,18 +34,16 @@ class StudentData(BaseModel):
     sleep_hours_per_night   : float = Field(..., ge=0, le=24)
     stress_level            : Literal['Medium', 'Low', 'Very High', 'High']
 
-# Describe what we send back
 class PredictionResponse(BaseModel):
-    predicted_mental_health_score:float
-    #6.777777 -> float
+    predicted_mental_health_score: float
 
-@app.get('/')
-def greet():
-    return {'Welcome'}
+@app.get('/api/health')
+def health():
+    return {'status': 'ok'}
 
-@app.post('/predict', response_model=PredictionResponse) #6.77777
+@app.post('/predict', response_model=PredictionResponse)
 def predict(data: StudentData):
-   
+
    country_group = data.country if data.country in top_countries else "Other"
 
    input_row = pd.DataFrame([{
@@ -58,8 +59,16 @@ def predict(data: StudentData):
         'Physical_Activity_Hours'   :data.physical_activity_hours,
         'Sleep_Hours_Per_Night'     :data.sleep_hours_per_night,
         'Stress_Level'              :data.stress_level,
-        'Group_country'           :country_group
+        'Group_country'             :country_group
    }])
-   
-   prediction = model.predict(input_row)[0] #6.77
+
+   prediction = model.predict(input_row)[0]
    return PredictionResponse(predicted_mental_health_score=round(float(prediction),2))
+
+# Serve static files (CSS, JS)
+app.mount("/static", StaticFiles(directory="."), name="static")
+
+# Serve index.html at root
+@app.get("/")
+def serve_frontend():
+    return FileResponse("index.html")
