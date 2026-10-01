@@ -1,16 +1,23 @@
 import joblib
 import pandas as pd
+import os
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 from typing import Literal
 from fastapi.middleware.cors import CORSMiddleware
-import os
 
-model = joblib.load('Mental_Health_Model.pkl')
-top_countries = ['Other','India','USA','Canada','Australia','UK','Germany','Mexico','Turkey','France']
+# ── Absolute directory of this file ─────────────────────────────────
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# ── Load ML model ────────────────────────────────────────────────────
+model = joblib.load(os.path.join(BASE_DIR, 'Mental_Health_Model.pkl'))
+
+top_countries = ['Other', 'India', 'USA', 'Canada', 'Australia',
+                 'UK', 'Germany', 'Mexico', 'Turkey', 'France']
+
+# ── App setup ────────────────────────────────────────────────────────
 app = FastAPI()
 
 app.add_middleware(
@@ -20,12 +27,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ── Pydantic models ──────────────────────────────────────────────────
 class StudentData(BaseModel):
-    age                     : int = Field(..., ge=10, le=100)
+    age                     : int   = Field(..., ge=10, le=100)
     gender                  : Literal['Male', 'Female']
     country                 : str
     academic_level          : Literal['Undergraduate', 'Graduate', 'High School']
-    most_used_platform      : Literal['Facebook', 'LinkedIn', 'Instagram', 'Snapchat','Twitter','YouTube', 'TikTok', 'LINE', 'KakaoTalk', 'VKontakte', 'WhatsApp','WeChat']
+    most_used_platform      : Literal['Facebook', 'LinkedIn', 'Instagram', 'Snapchat',
+                                      'Twitter', 'YouTube', 'TikTok', 'LINE',
+                                      'KakaoTalk', 'VKontakte', 'WhatsApp', 'WeChat']
     purpose_of_use          : Literal['Networking', 'Education', 'Entertainment', 'News']
     avg_daily_usage_hours   : float = Field(..., ge=0, le=24)
     daily_unlocks           : int   = Field(..., ge=0)
@@ -37,38 +47,38 @@ class StudentData(BaseModel):
 class PredictionResponse(BaseModel):
     predicted_mental_health_score: float
 
+# ── API routes (MUST be defined before app.mount) ────────────────────
 @app.get('/api/health')
 def health():
     return {'status': 'ok'}
 
 @app.post('/predict', response_model=PredictionResponse)
 def predict(data: StudentData):
+    country_group = data.country if data.country in top_countries else "Other"
 
-   country_group = data.country if data.country in top_countries else "Other"
+    input_row = pd.DataFrame([{
+        'Age'                    : data.age,
+        'Gender'                 : data.gender,
+        'Country'                : data.country,
+        'Academic_Level'         : data.academic_level,
+        'Most_Used_Platform'     : data.most_used_platform,
+        'Purpose_Of_Use'         : data.purpose_of_use,
+        'Avg_Daily_Usage_Hours'  : data.avg_daily_usage_hours,
+        'Daily_Unlocks'          : data.daily_unlocks,
+        'Study_Hours'            : data.study_hours,
+        'Physical_Activity_Hours': data.physical_activity_hours,
+        'Sleep_Hours_Per_Night'  : data.sleep_hours_per_night,
+        'Stress_Level'           : data.stress_level,
+        'Group_country'          : country_group,
+    }])
 
-   input_row = pd.DataFrame([{
-        'Age'                       :data.age,
-        'Gender'                    :data.gender,
-        'Country'                   :data.country,
-        'Academic_Level'            :data.academic_level,
-        'Most_Used_Platform'        :data.most_used_platform,
-        'Purpose_Of_Use'            :data.purpose_of_use,
-        'Avg_Daily_Usage_Hours'     :data.avg_daily_usage_hours,
-        'Daily_Unlocks'             :data.daily_unlocks,
-        'Study_Hours'               :data.study_hours,
-        'Physical_Activity_Hours'   :data.physical_activity_hours,
-        'Sleep_Hours_Per_Night'     :data.sleep_hours_per_night,
-        'Stress_Level'              :data.stress_level,
-        'Group_country'             :country_group
-   }])
+    prediction = model.predict(input_row)[0]
+    return PredictionResponse(predicted_mental_health_score=round(float(prediction), 2))
 
-   prediction = model.predict(input_row)[0]
-   return PredictionResponse(predicted_mental_health_score=round(float(prediction),2))
-
-# Serve static files (CSS, JS)
-app.mount("/static", StaticFiles(directory="."), name="static")
-
-# Serve index.html at root
+# Serve index.html at root — MUST come before app.mount()
 @app.get("/")
 def serve_frontend():
-    return FileResponse("index.html")
+    return FileResponse(os.path.join(BASE_DIR, "index.html"))
+
+# ── Static files mount (must be LAST) ────────────────────────────────
+app.mount("/static", StaticFiles(directory=BASE_DIR), name="static")
